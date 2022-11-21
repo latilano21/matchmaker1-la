@@ -1,11 +1,201 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Hello World Azure Template</title>
+<html lang="eng">
+<head> 
+     <meta charset="UTF-8"> 
+    <title> Logan's Matchmaker</title>
 </head>
+
+<style>
+    body { 
+        margin: 25px;
+        text-align:center;
+        color: rgb(116, 209, 219);
+        font-size: 25px;
+        background-color: indigo;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+    h1{
+        color: darkcyan;
+        font-size: 40px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+</style>
+
 <body>
-<h1>Azure Static Website Template</h1>
-<p>This page is a sample page for a “Hello World” Azure Static Website Template. The page contains an HTML validation warning. 
-Can you find and fix that warning?</p>
+    <H1>Matchmaker</H1>
+    <p>Answer the following questions with 1-5 to see if we are compatible. 1 is that you totally disagree. 2 is that you disagree. 3 is neutral. 4 is agree. And 5 is strongly agree.</p>
+    <label>Summer is the best season.</label><br />
+    <select id="q1">
+        <option value="1">Strongly Disagree</option>
+        <option value="2">Disagree</option>
+        <option value="3">Neutral</option>
+        <option value="4">Agree</option>
+        <option value="5">Strongly Agree</option>
+    </select>
+
+<br /><br />
+
+    <label>The Fruit Smiles Fruitsnacks are the best kind of fruitsnacks.</label><br />
+    <select id="q2">
+        <option value="1">Strongly Disagree</option>
+        <option value="2">Disagree</option>
+        <option value="3">Neutral</option>
+        <option value="4">Agree</option>
+        <option value="5">Strongly Agree</option>
+    </select>
+
+<br /><br />
+
+    <label>Watermelon is the best type of fruit.</label><br />
+    <select id="q3">
+        <option value="1">Strongly Disagree</option>
+        <option value="2">Disagree</option>
+        <option value="3">Neutral</option>
+        <option value="4">Agree</option>
+        <option value="5">Strongly Agree</option>
+    </select>
+
+<br /><br />
+
+    <label>Hiking is the best way to spend time outdoors.</label><br />
+    <select id="4">
+        <option value="1">Strongly Disagree</option>
+        <option value="2">Disagree</option>
+        <option value="3">Neutral</option>
+        <option value="4">Agree</option>
+        <option value="5">Strongly Agree</option>
+    </select>
+
+<br /><br />
+
+    <label>California is the best state in the country.</label><br />
+    <select id="5">
+        <option value="1">Strongly Disagree</option>
+        <option value="2">Disagree</option>
+        <option value="3">Neutral</option>
+        <option value="4">Agree</option>
+        <option value="5">Strongly Agree</option>
+    </select>
+
+    <br /><br />
+
+<button onclick="calculatecompatability ()">Calculate Compatability</button>
+<p id="calculatecompatability"></p>
+<p id="Message"></p>
+
+
+<script>
+    console.log("Starting Logan's Matchmaker");
+
+function calculatecompatability () 
+    console.log("calculatecompatability");
+    
+    const Desired_Response = [
+        5, // Strongly Agree// 
+        5, // Strongly Agree//
+        3, // Neutral // 
+        4, // Agree // 
+        2, // Disagree // 
+    ]
+
+    const Desired_Response_Weight = [
+        2,
+        1,
+        2,
+        1,
+        1
+    ]
+
+    const Max_Score = 35;
+
+    let question1response = document.getElementById("q1").selectedoptions[0].value;
+    console.log("Question 1 Answer:");
+    console.log(document.getElementById("q1").selectedoptions[0].text); 
+    console.log(document.getElementById("q1").selectedoptions[0].value);
+    console.log(question1response);
+
+    let question2response = document.getElementById("q2").selectedoptions[0].value;
+    console.log("Question 2 Amswer:");
+    console.log(document.getElementById("q2").selectedoptions[0].text);
+    console.log(document.getElementById("q2").selectedoptions[0].value);
+    console.log(question2response);
+
+    let question3response = document.getElementById("q3").selectedoptions[0].value;
+    console.log("Question 3 Answer:");
+    console.log(document.getElementById("q3").selectedoptions[0].text);
+    console.log(document.getElementById("q3").selectedoptions[0].value);
+    console.log(question3response);
+
+    let question4response = document.getElementById("q4").selectedoptions[0].value;
+    console.log("Question 4 Answer:");
+    console.log(document.getElementById("q4").selectedoptions[0].text);
+    console.log(document.getElementById("q4").selectedoptions[0].value);
+    console.log(question4response);
+
+    let question5response = document.getElementById("q5").selectedoptions[0].value;
+    console.log("Question 5 Answer");
+    console.log(document.getElementById("q5").selectedoptions[0].text);
+    console.log(document.getElementById("q5").selectedoptions[0].value);
+    console.log(question5response);
+
+    let question1compatability = (5 - Math.abs(question1response - Desired_Response[0]));
+    let question2compatability = (5 - Math.abs(question2response - Desired_Response[1])); 
+    let question3compatability = (5 - Math.abs(question3response - Desired_Response[2]));
+    let question4compatability = (5 - Math.abs(question4response - Desired_Response[3])); 
+    let question5compatability = (5 - Math.abs(question5response - Desired_Response[4]));
+
+    console.log("c1="+question1compatability);
+    console.log("c2="+question2compatability);
+    console.log("c3="+question3compatability);
+    console.log("c4="+question4compatability);
+    console.log("c5="+question5compatability);
+
+    let totalcompatability = question1compatability + question2compatability + question3compatability + question4compatability + question5compatability
+
+    totalcompatability *= 100 / Max_Score
+    totalcompatability = Math.round(totalcompatability);
+    console.log("totalcompatability" + totalcompatability);
+
+    document.getElementById("Compatability").innerHTML = "Score of Compatability" + totalcompatability + "%"; 
+
+    if (totalcompatability > 90) {
+        console.log("We are a match!\n")
+        document.getElementById("Message").innerHTML = "We are a match!";
+    }
+    else if(totalcompatability > 80) {
+        console.log("Let's set up a date\n")
+        document.getElementById("Message").innerHTML = "Let's set up a date";
+    }
+    else if (totalcompatability > 70) {
+        console.log("We can make this work.\n")
+        document.getElementById("Message").innerHTML = "We can make this work.";
+    }
+    else if(totalcompatability > 60) {
+        console.log("I might give ya a call\n")
+        document.getElementById("Message").innerHTML = "I might give ya a call";
+    }
+    else if(totalcompatability > 50) {
+        console.log("I think I'm busy that day, sorry.\n")
+        document.getElementById("Message").innerHTML = "I think I'm busy that day, sorry.";
+    }
+    else if(totalcompatability > 40) {
+        console.log("I don't think this is going to work out.\n")
+        document.getElementById("Message").innerHTML = "I don't think this is going to work out";
+    }
+    else if(totalcompatability > 30) {
+        console.log("We aren't meant to be\n")
+        document.getElementById("Message").innerHTML = "We aren't meant to be";
+    }
+    else if(totalcompatability > 20) {
+        console.log("Don'text, don't call\n")
+        document.getElementById("Message").innerHTML = "Don't text, don't call";
+    }
+    else if(totalcompatability > 10) {
+        console.log("Sorry, it's a no from me\n")
+        document.getElementById("Message").innerHTML = "Sorry, it's a no from me";
+    }
+
+
+</script>
 </body>
 </html>
